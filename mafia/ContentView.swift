@@ -8,12 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var players: [String] = []
+    @State private var new_player: String = ""
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Hello, mafia!")
+                .font(.largeTitle)
+            List {
+                ForEach(players, id: \.self) { player in
+                    Text(player)
+                }.onDelete { indexSet in
+                    players.remove(atOffsets: indexSet)
+                }.onMove { from, to in
+                    players.move(fromOffsets: from, toOffset: to)
+                }
+                
+                TextField(
+                    "New player",
+                    text: $new_player
+                )
+                .onSubmit {
+                    if (new_player != "") {
+                        players.append(new_player)
+                        new_player = ""
+                    }
+                }
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            }
         }
         .padding()
     }
