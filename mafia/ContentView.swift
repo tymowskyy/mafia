@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State private var players: [String] = []
     @State private var new_player: String = ""
+    @State private var n_mafia: Int = 0
     
     var body: some View {
         VStack {
@@ -37,6 +38,10 @@ struct ContentView: View {
                 }
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
+            }
+            Stepper("\(n_mafia) mafiosi \(players.count - n_mafia) villagers", value: $n_mafia, in: 0...players.count)
+            Button("Play") {
+                
             }
         }
         .padding()
