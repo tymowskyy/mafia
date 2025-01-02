@@ -19,24 +19,14 @@ class GameViewModel: ObservableObject {
         factions.remove(atOffsets: offsets)
     }
     
-    func increment(faction: Faction) {
-        if let index = factions.firstIndex(where: { $0.id == faction.id }) {
-            factions[index].size += 1
-        }
-    }
-    
-    func decrement(faction: Faction) {
-        if let index = factions.firstIndex(where: { $0.id == faction.id }) {
-            if factions[index].size > 0 {
-                factions[index].size -= 1
-            }
-        }
-    }
-    
     func numberOfPlayers() -> Int {
-        return factions.reduce(0, { (result, element) in
-            return result + element.size
-        })
+        return factions.reduce(0, { $0 + $1.size })
+    }
+    
+    func updateFactionSize(faction: Faction, size: Int) {
+        if let index = factions.firstIndex(where: { $0.id == faction.id }) {
+            factions[index].size = size
+        }
     }
     
     static func example() -> GameViewModel {

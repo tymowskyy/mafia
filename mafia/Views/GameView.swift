@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView: View {
     @StateObject private var viewModel: GameViewModel
     @State private var newFactionName: String = ""
+    @State var a: Int = 0
     
     init(viewModel: GameViewModel = GameViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -38,25 +39,13 @@ struct GameView: View {
                 ForEach(viewModel.factions, id: \.id) {
                     faction in
                     HStack {
-                        Text(faction.name)
-                        Spacer()
-                        
-                        Button(action: {
-                            viewModel.decrement(faction: faction)
-                        }) {
-                            Image(systemName: "minus")
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                        .disabled(faction.size == 0)
-                            
-
-                        Text("\(faction.size)")
-
-                        Button(action: {
-                            viewModel.increment(faction: faction)
-                        }) {
-                            Image(systemName: "plus")
-                        }.buttonStyle(BorderlessButtonStyle())
+                        Stepper("\(faction.name): \(faction.size)", value: Binding(
+                            get: { faction.size },
+                            set: { newSize in
+                                viewModel.updateFactionSize(faction: faction, size: newSize)
+                            }
+                        ), in: 0...Int.max)
+        
                     }
                 }
                 .onDelete(perform: viewModel.removeFaction)
