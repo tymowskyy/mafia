@@ -42,20 +42,28 @@ struct GameView: View {
                         Spacer()
                         
                         Button(action: {
-                            viewModel.increment(faction: faction)
-                        }) {
-                            Image(systemName: "plus")
-                        }.buttonStyle(BorderlessButtonStyle())
-                        Text("\(faction.size)")
-                        Button(action: {
                             viewModel.decrement(faction: faction)
                         }) {
                             Image(systemName: "minus")
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .disabled(faction.size == 0)
+                            
+
+                        Text("\(faction.size)")
+
+                        Button(action: {
+                            viewModel.increment(faction: faction)
+                        }) {
+                            Image(systemName: "plus")
                         }.buttonStyle(BorderlessButtonStyle())
                     }
                 }
                 .onDelete(perform: viewModel.removeFaction)
             }
+            Spacer()
+            
+            Text("\(viewModel.numberOfPlayers()) players")
         }
     }
 }
