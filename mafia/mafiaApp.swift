@@ -11,7 +11,7 @@ import SwiftUI
 struct mafiaApp: App {
     var body: some Scene {
         WindowGroup {
-            GameView()
+            SelectPlayersView()
         }
     }
 }

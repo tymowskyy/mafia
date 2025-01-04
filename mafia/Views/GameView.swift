@@ -10,7 +10,6 @@ import SwiftUI
 struct GameView: View {
     @StateObject private var viewModel: GameViewModel
     @State private var newFactionName: String = ""
-    @State var a: Int = 0
     
     init(viewModel: GameViewModel = GameViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
