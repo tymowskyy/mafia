@@ -10,6 +10,7 @@ import Foundation
 class GameViewModel: ObservableObject {
     
     @Published var factions: [Faction] = []
+    @Published var players: [Player] = []
     
     func addFaction(name: String) {
         factions.append(Faction(name: name))
@@ -19,7 +20,7 @@ class GameViewModel: ObservableObject {
         factions.remove(atOffsets: offsets)
     }
     
-    func numberOfPlayers() -> Int {
+    func numberOfRoles() -> Int {
         return factions.reduce(0, { $0 + $1.size })
     }
     

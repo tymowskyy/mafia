@@ -51,11 +51,14 @@ struct GameView: View {
             }
             Spacer()
             
-            Text("\(viewModel.numberOfPlayers()) players")
+            Text("\(viewModel.numberOfRoles()) / \(viewModel.players.count)")
         }
+        .navigationTitle("Faction Selection")
     }
 }
 
 #Preview {
-    GameView(viewModel: GameViewModel.example())
+    NavigationStack {
+        GameView(viewModel: GameViewModel.example())
+    }
 }

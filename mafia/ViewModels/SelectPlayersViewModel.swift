@@ -23,6 +23,12 @@ class SelectPlayersViewModel: ObservableObject {
         players.move(fromOffsets: source, toOffset: destination)
     }
     
+    func createGameViewModel() -> GameViewModel {
+        let gameVM = GameViewModel()
+        gameVM.players = players
+        return gameVM
+    }
+    
     static func example() -> SelectPlayersViewModel {
         let viewModel = SelectPlayersViewModel()
         viewModel.players = [

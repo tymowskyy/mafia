@@ -18,10 +18,6 @@ struct SelectPlayersView: View {
     
     var body: some View {
         VStack {
-            Text("Select Players")
-                .font(.largeTitle)
-                .padding(.top)
-
             List {
                 ForEach(viewModel.players, id: \.id) {
                     player in
@@ -48,13 +44,25 @@ struct SelectPlayersView: View {
             .background()
             Spacer()
             
-            Text("\(viewModel.players.count) players")
+            HStack {
+
+                Text("\(viewModel.players.count) players")
+                NavigationLink {
+                    GameView(viewModel: viewModel.createGameViewModel())
+                } label: {
+                    Image(systemName: "arrowshape.right")
+                }
+                .disabled(viewModel.players.isEmpty)
+            }
         }
+        .navigationTitle("Select players")
     }
     
 }
 
 #Preview {
-    SelectPlayersView(viewModel: SelectPlayersViewModel.example())
+    NavigationStack {
+        SelectPlayersView(viewModel: SelectPlayersViewModel.example())
+    }
 }
 
