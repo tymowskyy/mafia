@@ -30,6 +30,14 @@ class GameOptionsViewModel: ObservableObject {
         }
     }
     
+    func canStartGame() -> Bool {
+        return numberOfRoles() == players.count
+    }
+    
+    func createGameViewModel() -> GameViewModel {
+        GameViewModel(players: players, factions: factions)
+    }
+    
     static func example() -> GameOptionsViewModel {
         let viewModel = GameOptionsViewModel()
         viewModel.factions = [

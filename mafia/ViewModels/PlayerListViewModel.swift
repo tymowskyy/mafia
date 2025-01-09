@@ -23,7 +23,7 @@ class PlayerListViewModel: ObservableObject {
         players.move(fromOffsets: source, toOffset: destination)
     }
     
-    func createGameViewModel() -> GameOptionsViewModel {
+    func createGameOptionsViewModel() -> GameOptionsViewModel {
         let gameVM = GameOptionsViewModel()
         gameVM.players = players
         return gameVM

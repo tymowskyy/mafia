@@ -51,7 +51,18 @@ struct GameOptionsView: View {
             }
             Spacer()
             
-            Text("\(viewModel.numberOfRoles()) / \(viewModel.players.count)")
+            HStack {
+                Text("\(viewModel.numberOfRoles()) / \(viewModel.players.count) players")
+                NavigationLink {
+                    GameView(viewModel: GameViewModel(
+                        players: viewModel.players,
+                        factions: viewModel.factions
+                    ))
+                } label: {
+                    Image(systemName: "arrowshape.right")
+                }
+                .disabled(!viewModel.canStartGame())
+            }
         }
         .navigationTitle("Faction Selection")
     }
