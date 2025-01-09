@@ -10,7 +10,11 @@ import Foundation
 class GameOptionsViewModel: ObservableObject {
     
     @Published var factions: [Faction] = []
-    @Published var players: [Player] = []
+    @Published var playerNames: [String] = []
+    
+    init(playerNames: [String] = []) {
+        self.playerNames = playerNames
+    }
     
     func addFaction(name: String) {
         factions.append(Faction(name: name))
@@ -31,11 +35,11 @@ class GameOptionsViewModel: ObservableObject {
     }
     
     func canStartGame() -> Bool {
-        return numberOfRoles() == players.count
+        return numberOfRoles() == playerNames.count
     }
     
     func createGameViewModel() -> GameViewModel {
-        GameViewModel(players: players, factions: factions)
+        GameViewModel(playerNames: playerNames, factions: factions)
     }
     
     static func example() -> GameOptionsViewModel {

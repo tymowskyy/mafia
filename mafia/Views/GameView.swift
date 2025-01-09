@@ -19,6 +19,15 @@ struct GameView: View {
             List(viewModel.players) {
                 player in
                 HStack {
+                    Image(systemName: player.isAlive
+                          ? "largecircle.fill.circle"
+                          : "circle")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        viewModel.togglePlayerAlive(player: player)
+                    }
+                                  
                     Text(player.name)
                     Spacer()
                     Text(player.faction?.name ?? "")
@@ -28,5 +37,6 @@ struct GameView: View {
                 Text("Assign factions")
             }
         }
+        .navigationTitle("Game")
     }
 }

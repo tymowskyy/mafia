@@ -11,8 +11,11 @@ class GameViewModel: ObservableObject {
     @Published public var players: [Player]
     private var factions: [Faction]
     
-    init(players: [Player], factions: [Faction]) {
-        self.players = players
+    init(playerNames: [String], factions: [Faction]) {
+        players = playerNames.map {
+            player in
+            Player(name: player, isAlive: true)
+        }
         self.factions = factions
     }
     
@@ -30,6 +33,12 @@ class GameViewModel: ObservableObject {
                 playerInFaction = 0
                 factionIndex += 1
             }
+        }
+    }
+    
+    func togglePlayerAlive(player: Player) {
+        if let index = players.firstIndex(where: { $0.id == player.id }) {
+            players[index].isAlive.toggle()
         }
     }
 }

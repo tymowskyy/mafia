@@ -52,10 +52,10 @@ struct GameOptionsView: View {
             Spacer()
             
             HStack {
-                Text("\(viewModel.numberOfRoles()) / \(viewModel.players.count) players")
+                Text("\(viewModel.numberOfRoles()) / \(viewModel.playerNames.count) players")
                 NavigationLink {
                     GameView(viewModel: GameViewModel(
-                        players: viewModel.players,
+                        playerNames: viewModel.playerNames,
                         factions: viewModel.factions
                     ))
                 } label: {

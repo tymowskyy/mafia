@@ -12,4 +12,5 @@ struct Player: Identifiable {
     var id = UUID()
     var name: String
     var faction: Faction?
+    var isAlive: Bool
 }

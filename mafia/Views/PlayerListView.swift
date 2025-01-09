@@ -19,9 +19,9 @@ struct PlayerListView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.players, id: \.id) {
+                ForEach(viewModel.playerNames, id: \.self) {
                     player in
-                    Text("\(player.name)")
+                    Text("\(player)")
                 }
                 .onDelete(perform: viewModel.removePlayer)
                 .onMove(perform: viewModel.movePlayer)
@@ -46,13 +46,13 @@ struct PlayerListView: View {
             
             HStack {
 
-                Text("\(viewModel.players.count) players")
+                Text("\(viewModel.playerNames.count) players")
                 NavigationLink {
                     GameOptionsView(viewModel: viewModel.createGameOptionsViewModel())
                 } label: {
                     Image(systemName: "arrowshape.right")
                 }
-                .disabled(viewModel.players.isEmpty)
+                .disabled(viewModel.playerNames.isEmpty)
             }
         }
         .navigationTitle("Select players")
