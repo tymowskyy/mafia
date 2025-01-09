@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct SelectPlayersView: View {
+struct PlayerListView: View {
     
-    @StateObject private var viewModel: SelectPlayersViewModel
+    @StateObject private var viewModel: PlayerListViewModel
     @State private var newPlayerName: String = ""
     
-    init(viewModel: SelectPlayersViewModel = SelectPlayersViewModel()) {
+    init(viewModel: PlayerListViewModel = PlayerListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -48,7 +48,7 @@ struct SelectPlayersView: View {
 
                 Text("\(viewModel.players.count) players")
                 NavigationLink {
-                    GameView(viewModel: viewModel.createGameViewModel())
+                    GameOptionsView(viewModel: viewModel.createGameViewModel())
                 } label: {
                     Image(systemName: "arrowshape.right")
                 }
@@ -62,7 +62,7 @@ struct SelectPlayersView: View {
 
 #Preview {
     NavigationStack {
-        SelectPlayersView(viewModel: SelectPlayersViewModel.example())
+        PlayerListView(viewModel: PlayerListViewModel.example())
     }
 }
 

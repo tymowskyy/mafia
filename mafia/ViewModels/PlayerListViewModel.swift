@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SelectPlayersViewModel: ObservableObject {
+class PlayerListViewModel: ObservableObject {
     
     @Published var players: [Player] = []
     
@@ -23,14 +23,14 @@ class SelectPlayersViewModel: ObservableObject {
         players.move(fromOffsets: source, toOffset: destination)
     }
     
-    func createGameViewModel() -> GameViewModel {
-        let gameVM = GameViewModel()
+    func createGameViewModel() -> GameOptionsViewModel {
+        let gameVM = GameOptionsViewModel()
         gameVM.players = players
         return gameVM
     }
     
-    static func example() -> SelectPlayersViewModel {
-        let viewModel = SelectPlayersViewModel()
+    static func example() -> PlayerListViewModel {
+        let viewModel = PlayerListViewModel()
         viewModel.players = [
             Player(name: "John"),
             Player(name: "Smith")
