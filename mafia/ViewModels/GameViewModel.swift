@@ -11,10 +11,10 @@ class GameViewModel: ObservableObject {
     @Published public var players: [Player]
     private var factions: [Faction]
     
-    init(playerNames: [String], factions: [Faction]) {
+    init(playerNames: [PlayerName], factions: [Faction]) {
         players = playerNames.map {
             player in
-            Player(name: player, isAlive: true)
+            Player(id: player.id, name: player.name, isAlive: true)
         }
         self.factions = factions
     }

@@ -10,9 +10,9 @@ import Foundation
 class GameOptionsViewModel: ObservableObject {
     
     @Published var factions: [Faction] = []
-    @Published var playerNames: [String] = []
+    @Published var playerNames: [PlayerName] = []
     
-    init(playerNames: [String] = []) {
+    init(playerNames: [PlayerName] = []) {
         self.playerNames = playerNames
     }
     

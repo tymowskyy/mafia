@@ -9,10 +9,10 @@ import Foundation
 
 class PlayerListViewModel: ObservableObject {
     
-    @Published var playerNames: [String] = []
+    @Published var playerNames: [PlayerName] = []
     
     func addPlayer(name: String) {
-        playerNames.append(name)
+        playerNames.append(PlayerName(name: name))
     }
     
     func removePlayer(at offsets: IndexSet) {
@@ -30,8 +30,8 @@ class PlayerListViewModel: ObservableObject {
     static func example() -> PlayerListViewModel {
         let viewModel = PlayerListViewModel()
         viewModel.playerNames = [
-            "John",
-            "Smith"
+            PlayerName(name: "John"),
+            PlayerName(name: "Smith")
         ]
         return viewModel
     }

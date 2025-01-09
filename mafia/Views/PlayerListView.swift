@@ -19,9 +19,9 @@ struct PlayerListView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.playerNames, id: \.self) {
+                ForEach(viewModel.playerNames, id: \.id) {
                     player in
-                    Text("\(player)")
+                    Text("\(player.name)")
                 }
                 .onDelete(perform: viewModel.removePlayer)
                 .onMove(perform: viewModel.movePlayer)
