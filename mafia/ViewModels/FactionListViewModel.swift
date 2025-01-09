@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameOptionsViewModel: ObservableObject {
+class FactionListViewModel: ObservableObject {
     
     @Published var factions: [Faction] = []
     @Published var playerNames: [PlayerName] = []
@@ -42,8 +42,8 @@ class GameOptionsViewModel: ObservableObject {
         GameViewModel(playerNames: playerNames, factions: factions)
     }
     
-    static func example() -> GameOptionsViewModel {
-        let viewModel = GameOptionsViewModel()
+    static func example() -> FactionListViewModel {
+        let viewModel = FactionListViewModel()
         viewModel.factions = [
             Faction(name: "mafiosi", size: 2),
             Faction(name: "villagers", size: 7)

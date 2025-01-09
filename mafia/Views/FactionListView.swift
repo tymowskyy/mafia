@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct GameOptionsView: View {
-    @StateObject private var viewModel: GameOptionsViewModel
+struct FactionListView: View {
+    @StateObject private var viewModel: FactionListViewModel
     @State private var newFactionName: String = ""
     
-    init(viewModel: GameOptionsViewModel = GameOptionsViewModel()) {
+    init(viewModel: FactionListViewModel = FactionListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -70,6 +70,6 @@ struct GameOptionsView: View {
 
 #Preview {
     NavigationStack {
-        GameOptionsView(viewModel: GameOptionsViewModel.example())
+        FactionListView(viewModel: FactionListViewModel.example())
     }
 }

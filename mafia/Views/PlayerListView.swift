@@ -48,7 +48,7 @@ struct PlayerListView: View {
 
                 Text("\(viewModel.playerNames.count) players")
                 NavigationLink {
-                    GameOptionsView(viewModel: viewModel.createGameOptionsViewModel())
+                    FactionListView(viewModel: viewModel.createFactionListViewModel())
                 } label: {
                     Image(systemName: "arrowshape.right")
                 }
