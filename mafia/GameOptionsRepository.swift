@@ -40,10 +40,17 @@ class GameOptionsRepository: ObservableObject {
         playerNames.move(fromOffsets: IndexSet(integer: from), toOffset: to)
     }
     
-    static func example() -> GameOptionsRepository {
+    static func exampleIncomplete() -> GameOptionsRepository {
         return GameOptionsRepository(
             playerNames: [PlayerName(name: "John"), PlayerName(name: "Smith")],
             factions: [Faction(name: "villagers", size: 2), Faction(name: "mafia", size: 1)]
+        )
+    }
+    
+    static func exampleReadyToStart() -> GameOptionsRepository {
+        return GameOptionsRepository(
+            playerNames: [PlayerName(name: "A"), PlayerName(name: "B"), PlayerName(name: "C"), PlayerName(name: "D")],
+            factions: [Faction(name: "X", size: 3), Faction(name: "Y", size: 1)]
         )
     }
 }

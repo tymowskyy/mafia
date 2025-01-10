@@ -25,8 +25,7 @@ struct GameOptionsView: View {
                 Text("\(viewModel.numberOfPlayers()) / \(viewModel.numberOfRoles()) players")
                 NavigationLink {
                     GameView(viewModel: GameViewModel(
-                        playerNames: viewModel.playerNames,
-                        factions: viewModel.factions
+                        gameOptions: viewModel.repository
                     ))
                 } label: {
                     Image(systemName: "arrowshape.right")
@@ -53,7 +52,7 @@ struct GameOptionsView: View {
 #Preview {
     NavigationStack {
         GameOptionsView(
-            gameOptionsRepository: GameOptionsRepository.example()
+            gameOptionsRepository: GameOptionsRepository.exampleIncomplete()
         )
     }
 }

@@ -44,9 +44,3 @@ struct PlayerListView: View {
     }
     
 }
-
-//#Preview {
-//    NavigationStack {
-//        PlayerListView(viewModel: PlayerListViewModel.example())
-//    }
-//}

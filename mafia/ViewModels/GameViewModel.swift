@@ -11,12 +11,12 @@ class GameViewModel: ObservableObject {
     @Published var players: [Player]
     private var factions: [Faction]
     
-    init(playerNames: [PlayerName], factions: [Faction]) {
-        players = playerNames.map {
+    init(gameOptions: GameOptionsRepository) {
+        players = gameOptions.playerNames.map {
             player in
             Player(id: player.id, name: player.name, isAlive: true)
         }
-        self.factions = factions
+        self.factions = gameOptions.factions
     }
     
     func assingFactions() {

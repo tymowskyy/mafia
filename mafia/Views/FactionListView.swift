@@ -52,9 +52,3 @@ struct FactionListView: View {
         }
     }
 }
-
-//#Preview {
-//    NavigationStack {
-//        FactionListView(viewModel: FactionListViewModel.example())
-//    }
-//}

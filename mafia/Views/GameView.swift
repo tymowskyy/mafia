@@ -40,3 +40,9 @@ struct GameView: View {
         .navigationTitle("Game")
     }
 }
+
+#Preview {
+    NavigationStack {
+        GameView(viewModel: GameViewModel(gameOptions: GameOptionsRepository.exampleReadyToStart()))
+    }
+}
