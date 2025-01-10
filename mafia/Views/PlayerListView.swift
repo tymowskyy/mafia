@@ -9,59 +9,44 @@ import SwiftUI
 
 struct PlayerListView: View {
     
-    @StateObject private var viewModel: PlayerListViewModel
+    @ObservedObject var viewModel: PlayerListViewModel
     @State private var newPlayerName: String = ""
     
-    init(viewModel: PlayerListViewModel = PlayerListViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: PlayerListViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(viewModel.playerNames, id: \.id) {
-                    player in
-                    Text("\(player.name)")
-                }
-                .onDelete(perform: viewModel.removePlayer)
-                .onMove(perform: viewModel.movePlayer)
-                
-                HStack {
-                    TextField("Enter player's name", text: $newPlayerName)
-                    
-                    Button(action: {
-                        if !newPlayerName.isEmpty {
-                            viewModel.addPlayer(name: newPlayerName)
-                        }
-                        newPlayerName = ""
-                    }) {
-                        Image(systemName: "plus")
-                        
-                    }
-                }
-                
+        List {
+            ForEach(viewModel.playerNames, id: \.id) {
+                player in
+                Text("\(player.name)")
             }
-            .background()
-            Spacer()
+            .onDelete(perform: viewModel.removePlayer)
+            .onMove(perform: viewModel.movePlayer)
             
             HStack {
-
-                Text("\(viewModel.playerNames.count) players")
-                NavigationLink {
-                    FactionListView(viewModel: viewModel.createFactionListViewModel())
-                } label: {
-                    Image(systemName: "arrowshape.right")
+                TextField("Enter player's name", text: $newPlayerName)
+                
+                Button(action: {
+                    if !newPlayerName.isEmpty {
+                        viewModel.addPlayer(name: newPlayerName)
+                    }
+                    newPlayerName = ""
+                }) {
+                    Image(systemName: "plus")
+                    
                 }
-                .disabled(viewModel.playerNames.isEmpty)
             }
+            
         }
-        .navigationTitle("Select players")
+        .background()
     }
     
 }
 
-#Preview {
-    NavigationStack {
-        PlayerListView(viewModel: PlayerListViewModel.example())
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        PlayerListView(viewModel: PlayerListViewModel.example())
+//    }
+//}

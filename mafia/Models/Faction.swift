@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  Faction.swift
 //  mafia
 //
 //  Created by Tymoteusz Stępkowski on 02/01/2025.

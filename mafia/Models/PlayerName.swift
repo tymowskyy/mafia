@@ -1,8 +1,8 @@
 //
-//  Player.swift
+//  PlayerName.swift
 //  mafia
 //
-//  Created by Tymoteusz Stępkowski on 04/01/2025.
+//  Created by Tymoteusz Stępkowski on 09/01/2025.
 //
 
 

@@ -2,38 +2,36 @@
 //  GameViewModel.swift
 //  mafia
 //
-//  Created by Tymoteusz Stępkowski on 02/01/2025.
+//  Created by Tymoteusz Stępkowski on 04/01/2025.
 //
 
 import Foundation
+import Combine
 
 class PlayerListViewModel: ObservableObject {
-    
     @Published var playerNames: [PlayerName] = []
+    private var repository: GameOptionsRepository
+    
+    init(repository: GameOptionsRepository) {
+        self.repository = repository
+        repository.$playerNames
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$playerNames)
+    }
     
     func addPlayer(name: String) {
-        playerNames.append(PlayerName(name: name))
+        repository.addPlayer(player: PlayerName(name: name))
     }
     
     func removePlayer(at offsets: IndexSet) {
-        playerNames.remove(atOffsets: offsets)
+        if let firstIndex = offsets.first {
+            repository.removePlayer(at: firstIndex)
+        }
     }
     
     func movePlayer(from source: IndexSet, to destination: Int) {
-        playerNames.move(fromOffsets: source, toOffset: destination)
+        if let firstIndex = source.first {
+            repository.movePlayer(from: firstIndex, to: destination)
+        }
     }
-    
-    func createFactionListViewModel() -> FactionListViewModel {
-        return FactionListViewModel(playerNames: playerNames)
-    }
-    
-    static func example() -> PlayerListViewModel {
-        let viewModel = PlayerListViewModel()
-        viewModel.playerNames = [
-            PlayerName(name: "John"),
-            PlayerName(name: "Smith")
-        ]
-        return viewModel
-    }
-
 }

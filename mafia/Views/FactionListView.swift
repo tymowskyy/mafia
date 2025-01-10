@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct FactionListView: View {
-    @StateObject private var viewModel: FactionListViewModel
+    @ObservedObject private var viewModel: FactionListViewModel
     @State private var newFactionName: String = ""
     
-    init(viewModel: FactionListViewModel = FactionListViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: FactionListViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -49,27 +49,12 @@ struct FactionListView: View {
                 }
                 .onDelete(perform: viewModel.removeFaction)
             }
-            Spacer()
-            
-            HStack {
-                Text("\(viewModel.numberOfRoles()) / \(viewModel.playerNames.count) players")
-                NavigationLink {
-                    GameView(viewModel: GameViewModel(
-                        playerNames: viewModel.playerNames,
-                        factions: viewModel.factions
-                    ))
-                } label: {
-                    Image(systemName: "arrowshape.right")
-                }
-                .disabled(!viewModel.canStartGame())
-            }
         }
-        .navigationTitle("Faction Selection")
     }
 }
 
-#Preview {
-    NavigationStack {
-        FactionListView(viewModel: FactionListViewModel.example())
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        FactionListView(viewModel: FactionListViewModel.example())
+//    }
+//}

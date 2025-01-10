@@ -12,7 +12,9 @@ struct mafiaApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                PlayerListView()
+                GameOptionsView(
+                    gameOptionsRepository: GameOptionsRepository()
+                )
             }
         }
     }

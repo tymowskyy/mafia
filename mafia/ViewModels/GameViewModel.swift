@@ -8,7 +8,7 @@
 import Foundation
 
 class GameViewModel: ObservableObject {
-    @Published public var players: [Player]
+    @Published var players: [Player]
     private var factions: [Faction]
     
     init(playerNames: [PlayerName], factions: [Faction]) {

@@ -6,49 +6,32 @@
 //
 
 import Foundation
+import Combine
 
 class FactionListViewModel: ObservableObject {
-    
     @Published var factions: [Faction] = []
-    @Published var playerNames: [PlayerName] = []
+    private var repository: GameOptionsRepository
     
-    init(playerNames: [PlayerName] = []) {
-        self.playerNames = playerNames
+    init(repository: GameOptionsRepository) {
+        self.repository = repository
+        repository.$factions
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$factions)
     }
     
     func addFaction(name: String) {
-        factions.append(Faction(name: name))
+        repository.addFaction(faction: Faction(name: name))
     }
     
     func removeFaction(at offsets: IndexSet) {
-        factions.remove(atOffsets: offsets)
-    }
-    
-    func numberOfRoles() -> Int {
-        return factions.reduce(0, { $0 + $1.size })
+        if let firstIndex = offsets.first {
+               repository.removeFaction(at: firstIndex)
+           }
     }
     
     func updateFactionSize(faction: Faction, size: Int) {
         if let index = factions.firstIndex(where: { $0.id == faction.id }) {
-            factions[index].size = size
+            repository.changeFactionSize(at: index, newSize: size)
         }
     }
-    
-    func canStartGame() -> Bool {
-        return numberOfRoles() == playerNames.count
-    }
-    
-    func createGameViewModel() -> GameViewModel {
-        GameViewModel(playerNames: playerNames, factions: factions)
-    }
-    
-    static func example() -> FactionListViewModel {
-        let viewModel = FactionListViewModel()
-        viewModel.factions = [
-            Faction(name: "mafiosi", size: 2),
-            Faction(name: "villagers", size: 7)
-        ]
-        return viewModel
-    }
-
 }
