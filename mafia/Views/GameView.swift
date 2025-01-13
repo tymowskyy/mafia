@@ -43,7 +43,7 @@ struct GameView: View {
 
 #Preview {
     NavigationStack {
-        GameView(viewModel: GameViewModel(gameOptions: GameOptionsRepository.exampleReadyToStart()))
+        GameView(viewModel: GameViewModel(gameOptions: GameOptionsRepository.exampleReadyToStart().gameOptions))
             .navigationBarTitleDisplayMode(.inline)
     }
 }

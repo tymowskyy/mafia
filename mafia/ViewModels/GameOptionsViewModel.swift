@@ -9,27 +9,23 @@ import Foundation
 import Combine
 
 class GameOptionsViewModel: ObservableObject {
-    @Published var factions: [Faction] = []
-    @Published var playerNames: [PlayerName] = []
+    @Published var gameOptions = GameOptionsModel()
     var repository: GameOptionsRepository
 
 
     init(repository: GameOptionsRepository) {
         self.repository = repository
-        repository.$factions
+        repository.$gameOptions
             .receive(on: DispatchQueue.main)
-            .assign(to: &$factions)
-        repository.$playerNames
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$playerNames)
+            .assign(to: &$gameOptions)
     }
     
     func numberOfPlayers() -> Int {
-        return playerNames.count
+        return gameOptions.playerNames.count
     }
     
     func numberOfRoles() -> Int {
-        return factions.reduce(0, { $0 + $1.size })
+        return gameOptions.factions.reduce(0, { $0 + $1.size })
     }
     
     func canStartGame() -> Bool {

@@ -14,7 +14,8 @@ class PlayerListViewModel: ObservableObject {
     
     init(repository: GameOptionsRepository) {
         self.repository = repository
-        repository.$playerNames
+        repository.$gameOptions
+            .map { $0.playerNames }
             .receive(on: DispatchQueue.main)
             .assign(to: &$playerNames)
     }

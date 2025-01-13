@@ -8,36 +8,35 @@
 import Foundation
 
 class GameOptionsRepository: ObservableObject {
-    @Published private(set) var playerNames: [PlayerName]
-    @Published private(set) var factions: [Faction]
+    @Published private(set) var gameOptions = GameOptionsModel()
     
     init(playerNames: [PlayerName] = [], factions: [Faction] = []) {
-        self.playerNames = playerNames
-        self.factions = factions
+        gameOptions.playerNames = playerNames
+        gameOptions.factions = factions
     }
     
     func addFaction(faction: Faction) {
-        factions.append(faction)
+        gameOptions.factions.append(faction)
     }
     
     func removeFaction(at: Int) {
-        factions.remove(at: at)
+        gameOptions.factions.remove(at: at)
     }
     
     func changeFactionSize(at: Int, newSize: Int) {
-        factions[at].size = newSize
+        gameOptions.factions[at].size = newSize
     }
     
     func addPlayer(player: PlayerName) {
-        playerNames.append(player)
+        gameOptions.playerNames.append(player)
     }
     
     func removePlayer(at: Int) {
-        playerNames.remove(at: at)
+        gameOptions.playerNames.remove(at: at)
     }
     
     func movePlayer(from: Int, to: Int) {
-        playerNames.move(fromOffsets: IndexSet(integer: from), toOffset: to)
+        gameOptions.playerNames.move(fromOffsets: IndexSet(integer: from), toOffset: to)
     }
     
     static func exampleIncomplete() -> GameOptionsRepository {

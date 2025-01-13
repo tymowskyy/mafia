@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum GameState {
     case options
     case game

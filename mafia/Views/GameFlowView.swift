@@ -20,7 +20,7 @@ struct GameFlowView: View {
                 coordinator.startGame()
             }
         case .game:
-            GameView(viewModel: GameViewModel(gameOptions: coordinator.gameOptionsRepository))
+            GameView(viewModel: GameViewModel(gameOptions: coordinator.gameOptionsRepository.gameOptions))
         }
     }
 }

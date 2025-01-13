@@ -11,7 +11,7 @@ class GameViewModel: ObservableObject {
     @Published var players: [Player]
     private var factions: [Faction]
     
-    init(gameOptions: GameOptionsRepository) {
+    init(gameOptions: GameOptionsModel) {
         players = gameOptions.playerNames.map {
             player in
             Player(id: player.id, name: player.name, isAlive: true)

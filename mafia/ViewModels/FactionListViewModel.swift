@@ -14,7 +14,8 @@ class FactionListViewModel: ObservableObject {
     
     init(repository: GameOptionsRepository) {
         self.repository = repository
-        repository.$factions
+        repository.$gameOptions
+            .map { $0.factions }
             .receive(on: DispatchQueue.main)
             .assign(to: &$factions)
     }
