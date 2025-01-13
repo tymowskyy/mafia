@@ -51,7 +51,7 @@ struct GameOptionsView: View {
 #Preview {
     NavigationStack {
         GameOptionsView(
-            viewModel: GameOptionsViewModel(repository: GameOptionsRepository.exampleIncomplete())
+            viewModel: GameOptionsViewModel(repository: GameOptionsRepository(gameOptions: GameOptionsModel.exampleIncomplete()))
         ){}.navigationBarTitleDisplayMode(.inline)
     }
 }

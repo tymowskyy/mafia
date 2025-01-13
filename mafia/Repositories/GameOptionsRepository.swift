@@ -8,11 +8,10 @@
 import Foundation
 
 class GameOptionsRepository: ObservableObject {
-    @Published private(set) var gameOptions = GameOptionsModel()
+    @Published private(set) var gameOptions: GameOptionsModel
     
-    init(playerNames: [PlayerName] = [], factions: [Faction] = []) {
-        gameOptions.playerNames = playerNames
-        gameOptions.factions = factions
+    init(gameOptions: GameOptionsModel = GameOptionsModel()) {
+        self.gameOptions = gameOptions
     }
     
     func addFaction(faction: Faction) {
@@ -37,19 +36,5 @@ class GameOptionsRepository: ObservableObject {
     
     func movePlayer(from: Int, to: Int) {
         gameOptions.playerNames.move(fromOffsets: IndexSet(integer: from), toOffset: to)
-    }
-    
-    static func exampleIncomplete() -> GameOptionsRepository {
-        return GameOptionsRepository(
-            playerNames: [PlayerName(name: "John"), PlayerName(name: "Smith")],
-            factions: [Faction(name: "villagers", size: 2), Faction(name: "mafia", size: 1)]
-        )
-    }
-    
-    static func exampleReadyToStart() -> GameOptionsRepository {
-        return GameOptionsRepository(
-            playerNames: [PlayerName(name: "A"), PlayerName(name: "B"), PlayerName(name: "C"), PlayerName(name: "D")],
-            factions: [Faction(name: "X", size: 3), Faction(name: "Y", size: 1)]
-        )
     }
 }

@@ -42,5 +42,4 @@ struct PlayerListView: View {
         }
         .background()
     }
-    
 }
