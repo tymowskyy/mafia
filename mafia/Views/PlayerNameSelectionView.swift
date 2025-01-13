@@ -1,5 +1,5 @@
 //
-//  SelectPlayersView.swift
+//  PlayerNameSelectionView.swift
 //  mafia
 //
 //  Created by Tymoteusz Stępkowski on 04/01/2025.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct PlayerListView: View {
+struct PlayerNameSelectionView: View {
     
-    @ObservedObject var viewModel: PlayerListViewModel
+    @ObservedObject var viewModel: PlayerNameSelectionViewModel
     @State private var newPlayerName: String = ""
     
-    init(viewModel: PlayerListViewModel) {
+    init(viewModel: PlayerNameSelectionViewModel) {
         self.viewModel = viewModel
     }
     

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class GameOptionsViewModel: ObservableObject {
-    @Published var gameOptions = GameOptionsModel()
+    @Published var gameOptions = GameOptions()
     var repository: GameOptionsRepository
 
 

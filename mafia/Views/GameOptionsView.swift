@@ -10,14 +10,14 @@ import SwiftUI
 struct GameOptionsView: View {
     
     @ObservedObject private var viewModel: GameOptionsViewModel
-    private var playerListViewModel: PlayerListViewModel
-    private var factionListViewModel: FactionListViewModel
+    private var playerNameViewModel: PlayerNameSelectionViewModel
+    private var factionViewModel: FactionSelectionViewModel
     let onGameStart: () -> Void
     
     init(viewModel: GameOptionsViewModel, onGameStart: @escaping () -> Void) {
         self.viewModel = viewModel
-        playerListViewModel = PlayerListViewModel(repository: viewModel.repository)
-        factionListViewModel = FactionListViewModel(repository: viewModel.repository)
+        playerNameViewModel = PlayerNameSelectionViewModel(repository: viewModel.repository)
+        factionViewModel = FactionSelectionViewModel(repository: viewModel.repository)
         self.onGameStart = onGameStart
     }
     
@@ -35,11 +35,11 @@ struct GameOptionsView: View {
             .padding(.leading)
             TabView {
                 Tab("Players", systemImage: "person.3") {
-                    PlayerListView(viewModel: playerListViewModel)
+                    PlayerNameSelectionView(viewModel: playerNameViewModel)
                 }
           
                 Tab("Factions", systemImage: "flag.2.crossed") {
-                    FactionListView(viewModel: factionListViewModel)
+                    FactionSelectionView(viewModel: factionViewModel)
                 }
        
             }
@@ -51,7 +51,7 @@ struct GameOptionsView: View {
 #Preview {
     NavigationStack {
         GameOptionsView(
-            viewModel: GameOptionsViewModel(repository: GameOptionsRepository(gameOptions: GameOptionsModel.exampleIncomplete()))
+            viewModel: GameOptionsViewModel(repository: GameOptionsRepository(gameOptions: GameOptions.exampleIncomplete()))
         ){}.navigationBarTitleDisplayMode(.inline)
     }
 }

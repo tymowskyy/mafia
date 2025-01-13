@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  PlayerNameSelectionViewModel.swift
 //  mafia
 //
 //  Created by Tymoteusz Stępkowski on 04/01/2025.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class PlayerListViewModel: ObservableObject {
+class PlayerNameSelectionViewModel: ObservableObject {
     @Published var playerNames: [PlayerName] = []
     private var repository: GameOptionsRepository
     

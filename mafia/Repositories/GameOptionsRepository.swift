@@ -8,9 +8,9 @@
 import Foundation
 
 class GameOptionsRepository: ObservableObject {
-    @Published private(set) var gameOptions: GameOptionsModel
+    @Published private(set) var gameOptions: GameOptions
     
-    init(gameOptions: GameOptionsModel = GameOptionsModel()) {
+    init(gameOptions: GameOptions = GameOptions()) {
         self.gameOptions = gameOptions
     }
     

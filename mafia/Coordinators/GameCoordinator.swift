@@ -9,7 +9,7 @@ import Foundation
 
 
 class GameCoordinator: ObservableObject {
-    @Published var gameState: GameState = .options
+    @Published var gameState: GameFlowState = .options
     let gameOptionsRepository: GameOptionsRepository = GameOptionsRepository()
     
     func startGame() {

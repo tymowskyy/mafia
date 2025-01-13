@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FactionSelectionView.swift
 //  mafia
 //
 //  Created by Tymoteusz Stępkowski on 02/01/2025.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct FactionListView: View {
-    @ObservedObject private var viewModel: FactionListViewModel
+struct FactionSelectionView: View {
+    @ObservedObject private var viewModel: FactionSelectionViewModel
     @State private var newFactionName: String = ""
     
-    init(viewModel: FactionListViewModel) {
+    init(viewModel: FactionSelectionViewModel) {
         self.viewModel = viewModel
     }
     

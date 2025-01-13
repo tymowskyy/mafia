@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  FactionSelectionViewModel.swift
 //  mafia
 //
 //  Created by Tymoteusz Stępkowski on 02/01/2025.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FactionListViewModel: ObservableObject {
+class FactionSelectionViewModel: ObservableObject {
     @Published var factions: [Faction] = []
     private var repository: GameOptionsRepository
     
