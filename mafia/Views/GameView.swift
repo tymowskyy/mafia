@@ -44,5 +44,6 @@ struct GameView: View {
 #Preview {
     NavigationStack {
         GameView(viewModel: GameViewModel(gameOptions: GameOptionsRepository.exampleReadyToStart()))
+            .navigationBarTitleDisplayMode(.inline)
     }
 }

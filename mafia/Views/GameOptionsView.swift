@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct GameOptionsView: View {
-
+    
     @ObservedObject private var viewModel: GameOptionsViewModel
     private var playerListViewModel: PlayerListViewModel
     private var factionListViewModel: FactionListViewModel
+    let onGameStart: () -> Void
     
-    init(gameOptionsRepository: GameOptionsRepository) {
-        _viewModel = ObservedObject(wrappedValue: GameOptionsViewModel(repository: gameOptionsRepository))
-        playerListViewModel = PlayerListViewModel(repository: gameOptionsRepository)
-        factionListViewModel = FactionListViewModel(repository: gameOptionsRepository)
+    init(viewModel: GameOptionsViewModel, onGameStart: @escaping () -> Void) {
+        self.viewModel = viewModel
+        playerListViewModel = PlayerListViewModel(repository: viewModel.repository)
+        factionListViewModel = FactionListViewModel(repository: viewModel.repository)
+        self.onGameStart = onGameStart
     }
     
     var body: some View {
         VStack{
             HStack {
                 Text("\(viewModel.numberOfPlayers()) / \(viewModel.numberOfRoles()) players")
-                NavigationLink {
-                    GameView(viewModel: GameViewModel(
-                        gameOptions: viewModel.repository
-                    ))
-                } label: {
+                Button(action: onGameStart)
+                {
                     Image(systemName: "arrowshape.right")
                 }
                 .disabled(!viewModel.canStartGame())
@@ -52,7 +51,7 @@ struct GameOptionsView: View {
 #Preview {
     NavigationStack {
         GameOptionsView(
-            gameOptionsRepository: GameOptionsRepository.exampleIncomplete()
-        )
+            viewModel: GameOptionsViewModel(repository: GameOptionsRepository.exampleIncomplete())
+        ){}.navigationBarTitleDisplayMode(.inline)
     }
 }

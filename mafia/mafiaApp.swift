@@ -9,13 +9,10 @@ import SwiftUI
 
 @main
 struct mafiaApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                GameOptionsView(
-                    gameOptionsRepository: GameOptionsRepository()
-                )
-            }
+            HomeView()
         }
     }
 }
