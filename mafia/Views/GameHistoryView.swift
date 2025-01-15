@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct GameHistoryView: View {
+    @EnvironmentObject private var coordinator: GameCoordinator
     @ObservedObject private var viewModel: GameHistoryViewModel
     
     init(viewModel: GameHistoryViewModel) {
@@ -23,11 +24,24 @@ struct GameHistoryView: View {
                 Spacer()
                 Text(viewModel.factionProportions(game))
             }
+            .swipeActions {
+                Button {
+                    coordinator.resumeGame(game)
+                }
+                label: {
+                    Label("Resume", systemImage: "rectangle.portrait.and.arrow.forward")
+                }
+                
+                Button {
+                    coordinator.newGameFromState(game)
+                }
+                label: {
+                    Label("Start New", systemImage: "list.bullet.rectangle.portrait")
+                }
+            }
+
         }
         .navigationTitle("GameHistory")
-        .onAppear() {
-            viewModel.fetch()
-        }
     }
 }
 

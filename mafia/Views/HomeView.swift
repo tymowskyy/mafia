@@ -9,7 +9,7 @@ import SwiftUI
 
 enum Screen: Hashable {
     case history
-    case options
+    case options(GameOptions = GameOptions())
     case game(GameState)
 }
 
@@ -27,7 +27,7 @@ struct HomeView: View {
 
                 Button("Start Game!")
                 {
-                    coordinator.goTo(Screen.options)
+                    coordinator.goTo(Screen.options())
                 }
                 Button("History")
                 {
@@ -38,8 +38,8 @@ struct HomeView: View {
                 switch destination {
                 case .history:
                     GameHistoryView(viewModel: GameHistoryViewModel(repository: coordinator.gameHistoryRepository))
-                case .options:
-                    GameOptionsView(viewModel: GameOptionsViewModel(repository: GameOptionsRepository()))
+                case .options(let gameOptions):
+                    GameOptionsView(viewModel: GameOptionsViewModel(repository: GameOptionsRepository(gameOptions: gameOptions)))
                 case.game(let gameState):
                     GameView(viewModel: GameViewModel(gameState: gameState))
                 }

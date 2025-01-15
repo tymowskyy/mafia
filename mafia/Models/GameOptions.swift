@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameOptions: Codable {
+struct GameOptions: Codable, Hashable {
     var playerNames: [PlayerName] = []
     var factions: [Faction] = []
 }

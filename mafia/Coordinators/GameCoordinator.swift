@@ -29,4 +29,12 @@ class GameCoordinator: ObservableObject {
         gameHistoryRepository.addGame(gameState)
         path.removeLast(path.count)
     }
+    
+    func resumeGame(_ gameState: GameState) {
+        goTo(.game(gameState))
+    }
+    
+    func newGameFromState(_ gameState: GameState) {
+        goTo(.options(gameState.toGameOptions()))
+    }
 }
