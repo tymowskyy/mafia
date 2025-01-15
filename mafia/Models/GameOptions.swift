@@ -7,9 +7,15 @@
 
 import Foundation
 
-struct GameOptions {
+struct GameOptions: Codable {
     var playerNames: [PlayerName] = []
     var factions: [Faction] = []
+}
+
+extension GameOptions {
+    func toGameState() -> GameState {
+        return GameState(factions: factions, players: playerNames.map({ Player(id: $0.id, name: $0.name) }))
+    }
 }
 
 #if DEBUG

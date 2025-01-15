@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct HomeView: View {
-
+    
     var body: some View {
         NavigationStack {
             Text("Home!")
@@ -19,6 +19,10 @@ struct HomeView: View {
             NavigationLink(destination: GameFlowView())
             {
                 Text("Start Game!")
+            }
+            NavigationLink(destination: GameHistoryView())
+            {
+                Text("History")
             }
         }
     }

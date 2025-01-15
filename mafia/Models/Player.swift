@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Player: Identifiable {
+struct Player: Codable, Identifiable {
     var id = UUID()
     var name: String
     var faction: Faction?
-    var isAlive: Bool
+    var isAlive: Bool = true
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Faction: Identifiable {
+struct Faction: Codable, Identifiable {
     var id = UUID()
     var name: String
     var size: Int = 0
