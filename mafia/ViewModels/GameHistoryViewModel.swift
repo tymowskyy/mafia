@@ -20,7 +20,7 @@ class GameHistoryViewModel: ObservableObject {
 
     init(repository: any GameHistoryRepository) {
         self.repository = repository
-        gameHistory = repository.fetchGames()
+        fetch()
     }
     
     func formattedDate(_ game: GameState) -> String {
@@ -29,5 +29,9 @@ class GameHistoryViewModel: ObservableObject {
     
     func factionProportions(_ game: GameState) -> String {
         game.factions.map({ String($0.size) }).joined(separator: "/")
+    }
+    
+    func fetch() {
+        gameHistory = repository.fetchGames()
     }
 }

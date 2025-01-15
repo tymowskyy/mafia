@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GameFlowView: View {
     
-    @StateObject var coordinator = GameCoordinator()
+    @EnvironmentObject var coordinator: GameCoordinator
     
     var body: some View {
         switch coordinator.gameState {
@@ -20,7 +20,7 @@ struct GameFlowView: View {
                 coordinator.startGame()
             }
         case .game:
-            GameView(viewModel: GameViewModel(gameOptions: coordinator.gameOptionsRepository.gameOptions))
+            GameView(viewModel: GameViewModel(gameState: coordinator.gameOptionsRepository.gameOptions.toGameState()), onGameEnd: coordinator.endGame)
         }
     }
 }

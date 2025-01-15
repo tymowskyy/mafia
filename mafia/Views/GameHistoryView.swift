@@ -21,6 +21,9 @@ struct GameHistoryView: View {
             }
         }
         .navigationTitle("GameHistory")
+        .onAppear() {
+            viewModel.fetch()
+        }
     }
 }
 

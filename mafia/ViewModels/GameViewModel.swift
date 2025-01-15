@@ -8,28 +8,23 @@
 import Foundation
 
 class GameViewModel: ObservableObject {
-    @Published var players: [Player]
-    private var factions: [Faction]
+    @Published var gameState: GameState
     
-    init(gameOptions: GameOptions) {
-        players = gameOptions.playerNames.map {
-            player in
-            Player(id: player.id, name: player.name, isAlive: true)
-        }
-        self.factions = gameOptions.factions
+    init(gameState: GameState) {
+        self.gameState = gameState
     }
     
     func assingFactions() {
-        let playersShuffled = players.shuffled()
+        let playersShuffled = gameState.players.shuffled()
         var factionIndex = 0
         var playerInFaction = 0
         
-        for i in 0...players.count-1 {
-            if let index = players.firstIndex(where: { $0.id == playersShuffled[i].id }) {
-                players[index].faction = factions[factionIndex]
+        for i in 0...gameState.players.count-1 {
+            if let index = gameState.players.firstIndex(where: { $0.id == playersShuffled[i].id }) {
+                gameState.players[index].faction = gameState.factions[factionIndex]
             }
             playerInFaction += 1
-            if playerInFaction >= factions[factionIndex].size {
+            if playerInFaction >= gameState.factions[factionIndex].size {
                 playerInFaction = 0
                 factionIndex += 1
             }
@@ -37,8 +32,8 @@ class GameViewModel: ObservableObject {
     }
     
     func togglePlayerAlive(player: Player) {
-        if let index = players.firstIndex(where: { $0.id == player.id }) {
-            players[index].isAlive.toggle()
+        if let index = gameState.players.firstIndex(where: { $0.id == player.id }) {
+            gameState.players[index].isAlive.toggle()
         }
     }
 }

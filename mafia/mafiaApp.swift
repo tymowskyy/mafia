@@ -10,12 +10,12 @@ import SwiftUI
 @main
 struct mafiaApp: App {
     
-    @StateObject private var gameHistoryRepository = InMemoryGameHistoryRepository()
+    private var gameHistoryRepository = InMemoryGameHistoryRepository()
     
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environmentObject(gameHistoryRepository)
+                .environmentObject(GameCoordinator(gameHistoryRepository: gameHistoryRepository))
                 .environmentObject(GameHistoryViewModel(repository: gameHistoryRepository))
         }
     }

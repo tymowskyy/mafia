@@ -9,14 +9,16 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject private var viewModel: GameViewModel
+    private var onGameEnd: (GameState) -> Void
     
-    init(viewModel: GameViewModel) {
+    init(viewModel: GameViewModel, onGameEnd: @escaping (GameState) -> Void) {
         self.viewModel = viewModel
+        self.onGameEnd = onGameEnd
     }
     
     var body: some View {
         VStack {
-            List(viewModel.players) {
+            List(viewModel.gameState.players) {
                 player in
                 HStack {
                     Image(systemName: player.isAlive
@@ -38,12 +40,19 @@ struct GameView: View {
             }
         }
         .navigationTitle("Game")
+        .onDisappear() {
+            onGameEnd(viewModel.gameState)
+        }
+        
     }
 }
 
 #Preview {
     NavigationStack {
-        GameView(viewModel: GameViewModel(gameOptions: GameOptions.exampleReadyToStart()))
-            .navigationBarTitleDisplayMode(.inline)
+        GameView(viewModel: GameViewModel(gameState: GameOptions.exampleReadyToStart().toGameState()))
+        {_ in 
+            
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
