@@ -7,22 +7,42 @@
 
 import SwiftUI
 
+enum Screen: Hashable {
+    case history
+    case options
+    case game(GameState)
+}
+
 
 struct HomeView: View {
     
+    @EnvironmentObject var coordinator: GameCoordinator
+    
     var body: some View {
-        NavigationStack {
-            Text("Home!")
-                .font(.largeTitle)
-                .bold()
+        NavigationStack(path: $coordinator.path) {
+            VStack {
+                Text("Home!")
+                    .font(.largeTitle)
+                    .bold()
 
-            NavigationLink(destination: GameFlowView())
-            {
-                Text("Start Game!")
+                Button("Start Game!")
+                {
+                    coordinator.goTo(Screen.options)
+                }
+                Button("History")
+                {
+                    coordinator.goTo(Screen.history)
+                }
             }
-            NavigationLink(destination: GameHistoryView())
-            {
-                Text("History")
+            .navigationDestination(for: Screen.self) { destination in
+                switch destination {
+                case .history:
+                    GameHistoryView(viewModel: GameHistoryViewModel(repository: coordinator.gameHistoryRepository))
+                case .options:
+                    GameOptionsView(viewModel: GameOptionsViewModel(repository: GameOptionsRepository()))
+                case.game(let gameState):
+                    GameView(viewModel: GameViewModel(gameState: gameState))
+                }
             }
         }
     }
@@ -30,4 +50,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(GameCoordinator(gameHistoryRepository: InMemoryGameHistoryRepository()))
 }

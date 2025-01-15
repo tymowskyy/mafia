@@ -9,23 +9,22 @@ import SwiftUI
 
 struct GameOptionsView: View {
     
+    @EnvironmentObject private var coordinator: GameCoordinator
     @ObservedObject private var viewModel: GameOptionsViewModel
     private var playerNameViewModel: PlayerNameSelectionViewModel
     private var factionViewModel: FactionSelectionViewModel
-    let onGameStart: () -> Void
     
-    init(viewModel: GameOptionsViewModel, onGameStart: @escaping () -> Void) {
+    init(viewModel: GameOptionsViewModel) {
         self.viewModel = viewModel
         playerNameViewModel = PlayerNameSelectionViewModel(repository: viewModel.repository)
         factionViewModel = FactionSelectionViewModel(repository: viewModel.repository)
-        self.onGameStart = onGameStart
     }
     
     var body: some View {
         VStack{
             HStack {
                 Text("\(viewModel.numberOfPlayers()) / \(viewModel.numberOfRoles()) players")
-                Button(action: onGameStart)
+                Button(action: { coordinator.startGame(viewModel.gameOptions) })
                 {
                     Image(systemName: "arrowshape.right")
                 }
@@ -52,6 +51,6 @@ struct GameOptionsView: View {
     NavigationStack {
         GameOptionsView(
             viewModel: GameOptionsViewModel(repository: GameOptionsRepository(gameOptions: GameOptions.exampleIncomplete()))
-        ){}.navigationBarTitleDisplayMode(.inline)
+        ).navigationBarTitleDisplayMode(.inline)
     }
 }

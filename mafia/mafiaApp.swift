@@ -16,7 +16,6 @@ struct mafiaApp: App {
         WindowGroup {
             HomeView()
                 .environmentObject(GameCoordinator(gameHistoryRepository: gameHistoryRepository))
-                .environmentObject(GameHistoryViewModel(repository: gameHistoryRepository))
         }
     }
 }

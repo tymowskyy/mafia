@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct GameHistoryView: View {
-    @EnvironmentObject private var viewModel: GameHistoryViewModel
+    @ObservedObject private var viewModel: GameHistoryViewModel
+    
+    init(viewModel: GameHistoryViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         List(viewModel.gameHistory) {
@@ -29,8 +33,7 @@ struct GameHistoryView: View {
 
 #Preview {
     NavigationStack {
-        GameHistoryView()
-            .environmentObject(GameHistoryViewModel(repository: InMemoryGameHistoryRepository.example()))
+        GameHistoryView(viewModel: GameHistoryViewModel(repository: InMemoryGameHistoryRepository.example()))
             .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameState: Codable, Identifiable {
+struct GameState: Codable, Identifiable, Hashable {
     var id = UUID()
     var factions: [Faction]
     var players: [Player]

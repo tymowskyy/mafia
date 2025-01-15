@@ -7,11 +7,13 @@
 
 import Foundation
 
-protocol GameHistoryRepository: ObservableObject {
+
+protocol GameHistoryRepository {
     func fetchGames() -> [GameState]
     
     func addGame(_ game: GameState)
 }
+
 
 class InMemoryGameHistoryRepository: GameHistoryRepository {
     private var gameHistory: [GameState] = []

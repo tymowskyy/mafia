@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject private var viewModel: GameViewModel
-    private var onGameEnd: (GameState) -> Void
     
-    init(viewModel: GameViewModel, onGameEnd: @escaping (GameState) -> Void) {
+    @EnvironmentObject private var coordinator: GameCoordinator
+    @ObservedObject private var viewModel: GameViewModel
+    
+    init(viewModel: GameViewModel) {
         self.viewModel = viewModel
-        self.onGameEnd = onGameEnd
     }
     
     var body: some View {
@@ -40,19 +40,14 @@ struct GameView: View {
             }
         }
         .navigationTitle("Game")
-        .onDisappear() {
-            onGameEnd(viewModel.gameState)
-        }
-        
+       .navigationBarBackButtonHidden(true)
+       .navigationBarItems(leading: Button("end game"){ coordinator.endGame(viewModel.gameState) })
     }
 }
 
 #Preview {
     NavigationStack {
         GameView(viewModel: GameViewModel(gameState: GameOptions.exampleReadyToStart().toGameState()))
-        {_ in 
-            
-        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }

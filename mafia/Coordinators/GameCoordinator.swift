@@ -6,30 +6,27 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 class GameCoordinator: ObservableObject {
-    @Published var gameState: GameFlowState = .options
-    private var gameHistoryRepository: any GameHistoryRepository
-    private(set) var gameOptionsRepository: GameOptionsRepository = GameOptionsRepository()
+    @Published var path = NavigationPath()
+    private(set) var gameHistoryRepository: any GameHistoryRepository
     
-    init(gameHistoryRepository: any GameHistoryRepository) {
+    init(gameHistoryRepository: GameHistoryRepository) {
         self.gameHistoryRepository = gameHistoryRepository
     }
     
-    func newGame() {
-        gameState = .options
-        gameOptionsRepository = GameOptionsRepository()
+    func goTo(_ screen: Screen) {
+        path.removeLast(path.count)
+        path.append(screen)
     }
     
-    func startGame() {
-        gameState = .game
+    func startGame(_ options: GameOptions) {
+        goTo(.game(options.toGameState()))
     }
     
-    func endGame(gameState: GameState) {
-        print("add")
+    func endGame(_ gameState: GameState) {
         gameHistoryRepository.addGame(gameState)
-        self.gameState = .options
-        gameOptionsRepository = GameOptionsRepository()
+        path.removeLast(path.count)
     }
 }
